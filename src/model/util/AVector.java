@@ -68,8 +68,13 @@ abstract class AVector implements IVector {
   }
 
   @Override
-  public IVector unitVector() {
-    return this.scalarProduct(1.0 / this.magnitude());
+  public IVector unitVector() throws IllegalArgumentException {
+    if (this.magnitude() == 0) {
+      throw new IllegalArgumentException("Unit vector undefined for the zero vector.");
+    }
+    else {
+      return this.scalarProduct(1.0 / this.magnitude());
+    }
   }
 
   @Override
@@ -98,5 +103,52 @@ abstract class AVector implements IVector {
   @Override
   public double magnitude() {
     return Math.sqrt(this.dot(this));
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) {
+      return true;
+    }
+    else if (!(other instanceof AVector)) {
+      return false;
+    }
+    else {
+      AVector otherVec = (AVector) other;
+      if (otherVec.dimension != this.dimension) {
+        return false;
+      }
+      else {
+        double epsilon = Constants.epsilon;
+        for (int index = 0; index < otherVec.dimension; index += 1) {
+          if (Math.abs(this.components[index] - otherVec.components[index]) >= epsilon) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    int hashCode = 0;
+    for (int index = 0; index < this.dimension; index += 1) {
+      hashCode += Double.hashCode(this.components[index]);
+    }
+
+    return hashCode;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("(");
+    for (int index = 0; index < this.dimension; index += 1) {
+      sb.append(String.format("%.3f", this.components[index])).append(", ");
+    }
+
+    String ret = sb.toString();
+    return ret.substring(0, ret.length() - 2) + ")";
   }
 }

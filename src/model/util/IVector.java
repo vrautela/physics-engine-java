@@ -24,7 +24,7 @@ public interface IVector {
    *                                  vector
    */
 
-  // TODO: is there a way to make this not doubleerface-level and still easily doable?
+  // TODO: is there a way to make this not interface-level and still easily doable?
   IVector add(double[] otherComponents) throws IllegalArgumentException;
 
   /**
@@ -43,14 +43,15 @@ public interface IVector {
    * @param k the scaling factor
    * @return the result of multiplying this vector by the scalar, {@code k}.
    */
-  // TODO: should I be using an double or some other numerical datatype like Bigdoubleeger?
+  // TODO: should I be using an double or some other numerical datatype like BigInteger?
   IVector scalarProduct(double k);
 
   /**
    * Returns the unit vector in the same direction as this vector.
    * @return the unit vector in the same direction as this vector
+   * @throws IllegalArgumentException if the given input is the zero vector
    */
-  IVector unitVector();
+  IVector unitVector() throws IllegalArgumentException;
 
   /**
    * Computes the dot product of this vector and the {@code other} vector.
@@ -72,7 +73,7 @@ public interface IVector {
    *                                  vector
    */
 
-  // TODO: is there a way to make this not doubleerface-level and still easily doable?
+  // TODO: is there a way to make this not interface-level and still easily doable?
   double dot(double[] otherComponents) throws IllegalArgumentException;
 
   /**

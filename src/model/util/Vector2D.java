@@ -4,7 +4,7 @@ package model.util;
  * A class representing a vector in two dimensions.
  */
 public class Vector2D extends AVector {
-  Vector2D(double x, double y) {
+  public Vector2D(double x, double y) {
     super(x, y);
   }
 
