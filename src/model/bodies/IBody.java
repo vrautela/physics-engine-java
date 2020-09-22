@@ -12,11 +12,23 @@ public interface IBody {
    * otherBody}.
    *
    * @param otherBody the body interacting with this one
-   * @return the net force vector on this body
+   * @return the net force vector on this body (from the other body)
+   * @throws IllegalArgumentException if the other body is not of the same dimensions as this one
    */
-  // TODO: Should I have an IllegalArgumentException in the signature
-  //  (in case the other IBody is not of the same dimensions as this one)?
-  IVector netForceFrom(IBody otherBody);
+  IVector netForceFrom(IBody otherBody) throws IllegalArgumentException;
+
+  /**
+   * Calculates the net force vector this body applies on the body at the given position with the
+   * given mass and charge.
+   *
+   * @param otherMass     mass of the other body
+   * @param otherCharge   charge of the other body
+   * @param otherPosition position of the other body
+   * @return the net force vector on the other body
+   * @throws IllegalArgumentException if the other body is not of the same dimensions as this one
+   */
+  IVector netForceOn(double otherMass, double otherCharge, IVector otherPosition)
+      throws IllegalArgumentException;
 
   /**
    * Does this body overlap with the given {@code otherBody}?

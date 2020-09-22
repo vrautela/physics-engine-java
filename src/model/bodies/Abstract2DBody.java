@@ -6,27 +6,11 @@ import model.util.Vector2D;
 /**
  * An abstract representation of a body in a two-dimensional world.
  */
-abstract class Abstract2DBody implements IBody {
-  /**
-   * Things a 2D Body has:
-   * - mass (number)
-   * - charge (number)
-   * - spin (number)
-   * - position (2D vector)
-   * - velocity (2D vector)
-   * - size (also for viewing purposes)
-   * - color (for viewing purposes)
-   */
-
-  final double mass;
-  double charge;
-  double spin;
-  final Vector2D position;
-  final Vector2D velocity;
-  final Color color;
+abstract class Abstract2DBody extends AbstractBody {
+  protected final double spin;
 
   /**
-   *
+   * Creates a new Abstract2DBody with the given characteristics.
    * @param mass
    * @param charge
    * @param spin
@@ -35,11 +19,7 @@ abstract class Abstract2DBody implements IBody {
    * @param color
    */
   Abstract2DBody(double mass, double charge, double spin, Vector2D position, Vector2D velocity, Color color) {
-    this.mass = mass;
-    this.charge = charge;
+    super(mass, charge, position, velocity, color);
     this.spin = spin;
-    this.position = position;
-    this.velocity = velocity;
-    this.color = color;
   }
 }

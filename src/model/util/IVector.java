@@ -7,6 +7,18 @@ package model.util;
 public interface IVector {
 
   /**
+   * Returns the dimension of this vector
+   * @return the dimension of this vector
+   */
+  int dimension();
+
+  /**
+   * Returns an array representing the components of this vector (in Cartesian coordinates).
+   * @return the aforementioned array
+   */
+  double[] components();
+
+  /**
    * Adds the {@code other} vector to this vector.
    *
    * @param other the vector to be added to this one
@@ -15,18 +27,6 @@ public interface IVector {
    *                                  vector
    */
   IVector add(IVector other) throws IllegalArgumentException;
-
-  /**
-   * Adds the vector with components {@code otherComponents} to this vector.
-   *
-   * @param otherComponents the components of the vector to be added to this one
-   * @return the result of adding this vector to the vector with {@code otherComponents}
-   * @throws IllegalArgumentException if the other vector has different dimensions from this
-   *                                  vector
-   */
-
-  // TODO: is there a way to make this not interface-level and still easily doable?
-  IVector add(double[] otherComponents) throws IllegalArgumentException;
 
   /**
    * Subtracts the {@code other} vector from this vector.
@@ -64,18 +64,6 @@ public interface IVector {
    */
   // TODO: should I be using an double or some other numerical datatype like Bigdoubleeger?
   double dot(IVector other) throws IllegalArgumentException;
-
-  /**
-   * Returns the dot product of this vector and the vector with components {@code otherComponents}.
-   *
-   * @param otherComponents the components of the vector to be dotted with this one
-   * @return the result of dotting this vector and the vector with {@code otherComponents}
-   * @throws IllegalArgumentException if the other vector has different dimensions from this
-   *                                  vector
-   */
-
-  // TODO: is there a way to make this not interface-level and still easily doable?
-  double dot(double[] otherComponents) throws IllegalArgumentException;
 
   /**
    * Returns the magnitude of this vector.

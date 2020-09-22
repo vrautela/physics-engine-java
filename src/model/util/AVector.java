@@ -1,11 +1,9 @@
 package model.util;
 
-import java.util.Arrays;
-
 /**
  * An abstract representation of a vector.
  */
-abstract class AVector implements IVector {
+public abstract class AVector implements IVector {
 
   private final double[] components;
   private final int dimension;
@@ -31,20 +29,28 @@ abstract class AVector implements IVector {
   abstract IVector create(double[] components) throws IllegalArgumentException;
 
   @Override
-  public IVector add(IVector other) throws IllegalArgumentException {
-    return other.add(this.components);
+  public int dimension() {
+    return this.dimension;
   }
 
   @Override
-  public IVector add(double[] otherComponents) throws IllegalArgumentException {
-    // TODO: perhaps abstract out this dimension error-checking behavior to its own method?
-    double otherDim = this.components.length;
-    if (this.dimension != otherDim) {
+  public double[] components() {
+    return this.components;
+  }
+
+  @Override
+  public IVector add(IVector other) throws IllegalArgumentException {
+    double[] otherComponents = other.components();
+
+    int thisDim = this.dimension;
+    int otherDim = otherComponents.length;
+
+    if (thisDim != otherDim) {
       // TODO: print out the vectors being added?
       throw new IllegalArgumentException("Cannot add two vectors of different dimensions");
     } else {
-      double[] addedComponents = new double[this.dimension];
-      for (int index = 0; index < this.dimension; index += 1) {
+      double[] addedComponents = new double[thisDim];
+      for (int index = 0; index < thisDim; index += 1) {
         addedComponents[index] = this.components[index] + otherComponents[index];
       }
 
@@ -79,14 +85,12 @@ abstract class AVector implements IVector {
 
   @Override
   public double dot(IVector other) throws IllegalArgumentException {
-    return other.dot(this.components);
-  }
+    double[] otherComponents = other.components();
 
-  @Override
-  public double dot(double[] otherComponents) throws IllegalArgumentException {
-    double otherDim = otherComponents.length;
+    int thisDim = this.dimension;
+    int otherDim = otherComponents.length;
 
-    if (this.dimension != otherDim) {
+    if (thisDim != otherDim) {
       // TODO: print out the vectors being dotted?
       throw new IllegalArgumentException("Cannot dot two vectors of different dimensions");
     } else {
@@ -131,6 +135,7 @@ abstract class AVector implements IVector {
     }
   }
 
+  // TODO: potential issue - hashCode() inconsistent with equals()
   @Override
   public int hashCode() {
     int hashCode = 0;
