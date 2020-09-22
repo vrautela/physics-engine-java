@@ -19,6 +19,15 @@ public interface IBody {
   IVector netForceFrom(IBody otherBody);
 
   /**
+   * Does this body overlap with the given {@code otherBody}?
+   * @param otherBody the body that could be overlapping with this one
+   * @return whether this body overlaps with the given one
+   */
+  // TODO: Should I have an IllegalArgumentException in the signature
+  //  (in case the other IBody is not of the same dimensions as this one)?
+  boolean overlaps(IBody otherBody);
+
+  /**
    * Moves this body by its current velocity.
    */
   // TODO: How should I specify for how long this body should move on one tick?

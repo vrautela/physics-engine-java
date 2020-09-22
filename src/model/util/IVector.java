@@ -3,6 +3,7 @@ package model.util;
 /**
  * An interface representing a vector.
  */
+// TODO: perhaps make a method that returns the components instead of having two adds and dots?
 public interface IVector {
 
   /**
